@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crop Yield Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            background-color: rgba(255, 140, 0, 0.1); /* Very light orange background for the container */
+            border-radius: 20px;
+            color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional shadow for better visibility */
+        }
+        .btn-primary {
+            background-color: #f44336; /* Red color */
+            border-color: #f44336;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background-color: #c62828; /* Darker red on hover */
+            border-color: #c62828;
+        }
+        .btn-secondary {
+            background-color: #ff5722; /* Blackish orange color */
+            border-color: #ff5722;
+            display: inline-block;
+        }
+        .btn-secondary:hover {
+            background-color: #e64a19; /* Darker blackish orange on hover */
+            border-color: #e64a19;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #ff5722; /* Dark orange color for labels */
+        }
+        .form-control {
+            background-color: #333; /* Darker black color for input fields */
+            color: #fff; /* White text in input fields */
+        }
+        .form-control::placeholder {
+            color: #999; /* Placeholder text color */
+        }
+        .prediction-box {
+            background-color: #333; /* Dark background for prediction box */
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #ff9800; /* Orange color for headers */
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center my-4">Crop Yield Prediction Platform</h1>
+
+    <div class="container my-4">
+        <h2 class="text-center text-warning">Enter Crop Details</h2>
+
+        <form action="/" method="post">
+            <div class="form-group">
+                <label for="Year">Year of Prediction</label>
+                <input type="number" class="form-control" name="Year" step="1" placeholder="Enter year (e.g., 2024)" required>
+            </div>
+            <div class="form-group">
+                <label for="average_rain_fall_mm_per_year">Average Annual Rainfall (mm)</label>
+                <input type="number" class="form-control" name="average_rain_fall_mm_per_year" step="0.01" placeholder="Enter value in mm (e.g., 1200.50)" required>
+            </div>
+            <div class="form-group">
+                <label for="pesticides_tonnes">Amount of Pesticides (tonnes)</label>
+                <input type="number" class="form-control" name="pesticides_tonnes" step="0.01" placeholder="Enter value in tonnes (e.g., 5.75)" required>
+            </div>
+            <div class="form-group">
+                <label for="avg_temp">Average Temperature (°C)</label>
+                <input type="number" class="form-control" name="avg_temp" step="0.01" placeholder="Enter value in °C (e.g., 25.50)" required>
+            </div>
+            <div class="form-group">
+                <label for="Area">Country (Choose from Drop-down Menu)</label>
+                <select class="form-control" name="Area" required>
+                    <option value="" disabled selected>Select a country</option>
+                    <option value="India">India</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Albania">Albania</option>
+                    <option value="Estonia">Estonia</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Bahrain">Bahrain</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Item">Crop Type (Choose from Drop-down Menu)</label>
+                <select class="form-control" name="Item" required>
+                    <option value="" disabled selected>Select a crop</option>
+                    <option value="Maize">Maize</option>
+                    <option value="Potatoes">Potatoes</option>
+                    <option value="Rice, paddy">Rice, paddy</option>
+                    <option value="Sorghum">Sorghum</option>
+                    <option value="Soybeans">Soybeans</option>
+                    <option value="Wheat">Wheat</option>
+                    <option value="Cassava">Cassava</option>
+                    <option value="Sweet potatoes">Sweet potatoes</option>
+                    <option value="Plantains and others">Plantains and others</option>
+                    <option value="Yams">Yams</option>
+                </select>
+            </div>
+            <div class="btn-container mt-2">
+                <button type="submit" class="btn btn-primary btn-lg">Predict Yield</button>
+                <button type="reset" class="btn btn-secondary btn-lg">Reset</button>
+            </div>
+        </form>
+        {% if prediction %}
+            <div class="prediction-box text-left">
+                <h2>Predicted Crop Yield</h2>
+                <p><strong>The Desired Yield in metric Tonnes is :</strong> {{ prediction['Predicting'] }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
